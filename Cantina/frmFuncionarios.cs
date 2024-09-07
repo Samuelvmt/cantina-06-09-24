@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using MosaicoSolutions.ViaCep;
 
 namespace Cantina
 {
@@ -83,10 +84,11 @@ namespace Cantina
             txtNumero.Clear();
             txtCidade.Clear();
             txtEndereco.Clear();
-            mskCep.Enabled = false;
-            mskCpf.Enabled = false;
-            mskTelefone.Enabled = false;
-            cbbEstado.Enabled = false;
+            mskCep.Clear();
+            mskCpf.Clear();
+            mskTelefone.Clear();
+            cbbEstado.Text = "";
+            btnNovo.Enabled = true;
             btnCadastrar.Enabled = false;
             btnExcluir.Enabled = false;
             btnAlterar.Enabled = false;
@@ -153,6 +155,7 @@ namespace Cantina
             {
                 MessageBox.Show("Cadastrado com sucesso.", "sIsTemA", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 desabilitarCampos();
+                limparCampos();
 
             }
                      
@@ -164,6 +167,33 @@ namespace Cantina
             btnNovo.Enabled = false;
             txtNome.Focus();
 
+        }
+
+
+        // Criando o método buscacep
+        public void buscaCep(string cep)
+        {
+            var viaCEPService = ViaCepService.Default();
+
+            var endereco = viaCEPService.ObterEndereco(cep);
+            txtEndereco.Text = endereco.Logradouro;
+            txtBairro.Text = endereco.Bairro;
+            txtCidade.Text = endereco.Localidade;
+            cbbEstado.Text = endereco.UF;
+
+            
+        }
+
+        private void mskCep_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode==Keys.Enter)
+            {
+                //buscaCep
+                buscaCep(mskCep.Text);
+                txtNumero.Focus();
+
+              
+            }
         }
     }
 }
