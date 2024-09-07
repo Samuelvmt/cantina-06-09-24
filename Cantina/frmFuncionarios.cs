@@ -72,6 +72,28 @@ namespace Cantina
         {
 
         }
+
+        //criando metodo limpar campos
+
+        public void limparCampos() {
+            txtCodigo.Clear();
+            txtNome.Clear();
+            txtEmail.Clear();
+            txtBairro.Clear();
+            txtNumero.Clear();
+            txtCidade.Clear();
+            txtEndereco.Clear();
+            mskCep.Enabled = false;
+            mskCpf.Enabled = false;
+            mskTelefone.Enabled = false;
+            cbbEstado.Enabled = false;
+            btnCadastrar.Enabled = false;
+            btnExcluir.Enabled = false;
+            btnAlterar.Enabled = false;
+            btnLimpar.Enabled = false;
+
+        }        
+        
         // Criando método para desabilitar campos
 
         public void desabilitarCampos()
@@ -121,9 +143,17 @@ namespace Cantina
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
             //verificando se os campos estão preenchidos
-            if (txtNome.Text.Equals("") && txtEmail.Text.Equals("") && mskCpf.Text.Equals(""))
+            if (txtNome.Text.Equals("") || txtEmail.Text.Equals("")|| mskCpf.Text.Equals("   .   .   -") || mskCep.Text.Equals("     -") || mskTelefone.Text.Equals("   .   .   -") ||  txtEndereco.Text.Equals("") || txtCidade.Text.Equals("") || txtBairro.Text.Equals("") ||
+                 txtNumero.Text.Equals(""))
             {
-                MessageBox.Show(" iScRevI");
+                MessageBox.Show(" iScRevI.","Sostema",MessageBoxButtons.OK,MessageBoxIcon.Error,MessageBoxDefaultButton.Button1); 
+
+            }
+         else
+            {
+                MessageBox.Show("Cadastrado com sucesso.", "sIsTemA", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                desabilitarCampos();
+
             }
                      
         }
