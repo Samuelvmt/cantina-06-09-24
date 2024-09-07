@@ -195,5 +195,10 @@ namespace Cantina
               
             }
         }
+
+        private void btnLimpar_Click(object sender, EventArgs e)
+        {
+            limparCampos();
+        }
     }
 }
