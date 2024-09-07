@@ -120,7 +120,12 @@ namespace Cantina
 
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-
+            //verificando se os campos estão preenchidos
+            if (txtNome.Text.Equals("") && txtEmail.Text.Equals("") && mskCpf.Text.Equals(""))
+            {
+                MessageBox.Show(" iScRevI");
+            }
+                     
         }
 
         private void btnNovo_Click(object sender, EventArgs e)
